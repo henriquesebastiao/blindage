@@ -1,8 +1,11 @@
 import base64
 import hashlib
 
-import bcrypt
+from argon2 import PasswordHasher
+from argon2.exceptions import VerificationError
 from cryptography.fernet import Fernet
+
+ph = PasswordHasher()
 
 
 def gen_key(main_password: str) -> bytes:
@@ -23,12 +26,12 @@ def decrypt(main_password: str, encrypted_password: bytes) -> str:
 
 
 def hash_main_password(main_password: str) -> str:
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(main_password.encode('utf-8'), salt)
-    return hashed_password.decode('utf-8')
+    return ph.hash(main_password)
 
 
 def verify_main_password(stored_hash: str, main_password: str) -> bool:
-    return bcrypt.checkpw(
-        main_password.encode('utf-8'), stored_hash.encode('utf-8')
-    )
+    try:
+        ph.verify(stored_hash.encode('utf-8'), main_password.encode('utf-8'))
+        return True
+    except VerificationError:
+        return False
