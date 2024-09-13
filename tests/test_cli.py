@@ -1,8 +1,5 @@
-from typer.testing import CliRunner
-
 from blindage.cli import app
-
-runner = CliRunner()
+from tests.conftest import runner
 
 
 def test_get_version():
@@ -15,4 +12,4 @@ def test_get_version():
 def test_main():
     result = runner.invoke(app)
     assert result.exit_code == 0
-    assert 'USAGE: skyport' in result.stdout
+    assert 'Pythonic Password Manager.' in result.stdout

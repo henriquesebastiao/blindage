@@ -42,6 +42,10 @@ ignore = ['E501']
 preview = true
 quote-style = 'single'
 
+[tool.ruff.lint.per-file-ignores]
+"database.py" = ["F811"]
+"tests/*" = ["PLR6301"]
+
 [tool.pytest.ini_options]
 pythonpath = "."
 addopts = '-p no:warnings'

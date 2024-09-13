@@ -1,8 +1,11 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from typer.testing import CliRunner
 
 from blindage.models import table_registry
+
+runner = CliRunner()
 
 
 @pytest.fixture

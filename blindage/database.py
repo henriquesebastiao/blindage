@@ -1,11 +1,15 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+import os
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from blindage.models import table_registry
 from blindage.settings import DATABASE_URL
 
-engine = create_engine(DATABASE_URL)
+if int(os.getenv('DEBUG', '0')):
+    engine = create_engine('sqlite:///:memory:')
+    table_registry.metadata.create_all(engine)
+else:
+    engine = create_engine(DATABASE_URL)
 
-
-def get_session():
-    with Session(engine) as session:
-        yield session
+Session = sessionmaker(engine)
