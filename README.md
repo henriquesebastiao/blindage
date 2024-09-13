@@ -1,6 +1,13 @@
-# Blindage
+# Blindage 🔐
 
 [![Test](https://github.com/henriquesebastiao/blindage/actions/workflows/test.yml/badge.svg)](https://github.com/henriquesebastiao/blindage/actions/workflows/test.yml)
 [![coverage](https://coverage-badge.samuelcolvin.workers.dev/henriquesebastiao/blindage.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/henriquesebastiao/blindage)
 
-Blindage é um gerenciador de senhas em CLI que armazenas suas senhas criptografadas em banco de dados SQLite na sua máquina.
+*You are in control of your data.*
+
+Blindage is a Python password manager in CLI that stores your passwords encrypted in a SQLite database on your machine.
+
+## Features
+
+- Saves the master password encrypted with the Argon 2 key derivation algorithm.
+- Stores other encrypted data based on a key generated from the master password, making it impossible to read the data without the encryption key, that is, without the master password.
