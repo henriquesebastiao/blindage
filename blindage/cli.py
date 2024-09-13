@@ -3,11 +3,17 @@ from rich import print
 from sqlalchemy import select
 from typing_extensions import Annotated, Optional
 
-from blindage.database import Session
-from blindage.models import Account, OtherAttribute
+from blindage.database import Session, engine, find_account_by_name
+from blindage.models import (
+    Account,
+    BlindageSettings,
+    OtherAttribute,
+    table_registry,
+)
+from blindage.security import encrypt, hash_main_password, verify_main_password
 
 app = typer.Typer(
-    help='Pythonic Password Manager.',
+    help='Pythonic Password Manager :locked_with_key:',
     no_args_is_help=True,
     rich_markup_mode='rich',
 )
@@ -41,6 +47,35 @@ def main(
 ): ...
 
 
+@app.command(
+    help='Generates a new database, [bold]this command should only be used once[/bold].'
+)
+def init():
+    """Generates a new database, this command should only be used once."""
+    main_pwd = typer.prompt('Main password', hide_input=True)
+    confirm_main_pwd = typer.prompt(
+        'Confirm your main password', hide_input=True
+    )
+
+    if not main_pwd == confirm_main_pwd:
+        print(
+            '[bold red]Confirmation password is not the same as main password.[/bold red]'
+        )
+        raise typer.Exit(1)
+
+    table_registry.metadata.create_all(engine)
+
+    with Session() as session:
+        blindage = BlindageSettings(main_password=hash_main_password(main_pwd))
+
+        session.add(blindage)
+        session.commit()
+
+    print(
+        '\n[bold]Database created [bold green]successfully[/bold green][/bold] :sparkles:'
+    )
+
+
 @app.command()
 def new():
     """Create a new credentials record."""
@@ -63,26 +98,35 @@ def new():
         else:
             break
 
+    main_password: str = typer.prompt('\nMain Password', hide_input=True)
+
+    with Session() as session:
+        blindage = session.scalars(select(BlindageSettings)).first()
+
+        if not verify_main_password(blindage.main_password, main_password):
+            print('[bold red]Wrong main password![/bold red]')
+            raise typer.Exit(1)
+
     with Session() as session:
         account = Account(
-            password=password,
-            name=name,
-            username=username,
-            url=url,
-            otp_secret=otp_secret,
-            recovery_codes=recovery_codes,
+            password=encrypt(main_password, password),
+            name=encrypt(main_password, name),
+            username=encrypt(main_password, username),
+            url=encrypt(main_password, url),
+            otp_secret=encrypt(main_password, otp_secret),
+            recovery_codes=encrypt(main_password, recovery_codes),
         )
 
         session.add(account)
         session.commit()
 
-        account = session.scalar(select(Account).where(Account.name == name))
+        account = find_account_by_name(name, main_password, session)
 
         if custom_fields:
             for field_item in custom_fields:
                 other_attribute = OtherAttribute(
-                    name=field_item[0],
-                    content=field_item[1],
+                    name=encrypt(main_password, field_item[0]),
+                    content=encrypt(main_password, field_item[1]),
                     account_id=account.id,
                 )
 

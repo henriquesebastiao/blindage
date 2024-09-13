@@ -6,6 +6,7 @@ from typer.testing import CliRunner
 from blindage.models import table_registry
 
 runner = CliRunner()
+MAIN_PASSWORD_TEST = 'Test12345@#$'
 
 
 @pytest.fixture

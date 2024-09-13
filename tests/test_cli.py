@@ -12,4 +12,4 @@ def test_get_version():
 def test_main():
     result = runner.invoke(app)
     assert result.exit_code == 0
-    assert 'Pythonic Password Manager.' in result.stdout
+    assert 'Pythonic Password Manager' in result.stdout
