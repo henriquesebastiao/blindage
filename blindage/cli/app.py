@@ -2,7 +2,7 @@ import typer
 from rich import print
 from typing_extensions import Annotated, Optional
 
-from blindage.cli import init, new
+from blindage.cli import gen, init, new
 
 app = typer.Typer(
     help='Pythonic Password Manager :locked_with_key:',
@@ -14,6 +14,7 @@ __version__ = '0.1.0'
 
 app.add_typer(init.command, name='init')
 app.add_typer(new.command, name='new')
+app.add_typer(gen.command, name='gen')
 
 
 def get_version(value: bool):

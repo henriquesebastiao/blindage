@@ -13,7 +13,10 @@ def gen_key(main_password: str) -> bytes:
     return base64.urlsafe_b64encode(sha256[:32])
 
 
-def encrypt(main_password: str, text: str) -> bytes:
+def encrypt(main_password: str, text: str) -> bytes | None:
+    if not text:
+        return None
+
     key = gen_key(main_password)
     fernet = Fernet(key)
     return fernet.encrypt(text.encode())

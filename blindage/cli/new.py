@@ -15,9 +15,11 @@ def new():
     name = typer.prompt('Name')
     username = typer.prompt('Username')
     password = typer.prompt('Password', hide_input=True)
-    url = typer.prompt('URL')
-    otp_secret = typer.prompt('OTP Secret')
-    recovery_codes = typer.prompt('Recovery Codes')
+    url = typer.prompt('URL', default='', show_default=False)
+    otp_secret = typer.prompt('OTP Secret', default='', show_default=False)
+    recovery_codes = typer.prompt(
+        'Recovery Codes', default='', show_default=False
+    )
 
     custom_fields = []
 
