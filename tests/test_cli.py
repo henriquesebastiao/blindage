@@ -1,4 +1,4 @@
-from blindage.cli import app
+from blindage.cli.app import app
 from tests.conftest import runner
 
 

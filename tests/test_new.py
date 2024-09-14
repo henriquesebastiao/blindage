@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from blindage.cli import app
+from blindage.cli.app import app
 from blindage.database import engine
 from blindage.models import table_registry
 from tests.conftest import MAIN_PASSWORD_TEST, runner
