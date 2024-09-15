@@ -1,18 +1,28 @@
+from pathlib import Path
+
 import typer
 from rich import print
 
 from blindage.database import Session, engine
+from blindage.messages import (
+    DB_ALREADY_EXISTS,
+    DB_CREATING_SUCCESSFULLY,
+    HELP_INIT,
+)
 from blindage.models import BlindageSettings, table_registry
 from blindage.security import hash_main_password
+from blindage.settings import DATABASE_NAME
 
-command = typer.Typer(
-    help='Generates a new database, [bold]this command should only be used once[/bold].'
-)
+command = typer.Typer(help=HELP_INIT)
 
 
 @command.callback(invoke_without_command=True)
 def main():
     """Generates a new database, this command should only be used once."""
+    if Path(DATABASE_NAME).exists():
+        print(DB_ALREADY_EXISTS)
+        raise typer.Exit(2)
+
     main_pwd = typer.prompt('Main password', hide_input=True)
     confirm_main_pwd = typer.prompt(
         'Confirm your main password', hide_input=True
@@ -32,6 +42,4 @@ def main():
         session.add(blindage)
         session.commit()
 
-    print(
-        '\n[bold]Database created [bold green]successfully[/bold green][/bold] :sparkles:'
-    )
+    print(f'\n{DB_CREATING_SUCCESSFULLY}')

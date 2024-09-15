@@ -5,8 +5,8 @@ from tests.conftest import runner
 def test_get_version():
     result = runner.invoke(app, ['--version'])
     assert result.exit_code == 0
-    assert 'Developed by' in result.stdout
-    assert 'Henrique Sebastião' in result.stdout
+    assert 'Pythonic Password Manager' in result.stdout
+    assert 'Made with' in result.stdout
 
 
 def test_main():

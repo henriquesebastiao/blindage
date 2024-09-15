@@ -13,6 +13,8 @@ pydantic = "^2.9.1"
 cryptography = "^43.0.1"
 alembic = "^1.13.2"
 argon2-cffi = "^23.1.0"
+pyotp = "^2.9.0"
+pyperclip = "^1.9.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -54,11 +56,14 @@ addopts = '-p no:warnings'
 [tool.coverage.run]
 omit = ["blindage/database.py"]
 
+[tool.bandit]
+exclude_dirs = ["blindage/messages.py"]
+
 [tool.taskipy.tasks]
 lint = 'ruff check .; ruff check . --diff'
 format = 'ruff format .; ruff check . --fix'
 radon = 'radon cc ./blindage -a -na'
-bandit = 'bandit -r ./blindage'
+bandit = 'bandit -c pyproject.toml -r ./blindage'
 pre_test = 'task lint'
 test = 'pytest -s -x --cov=blindage -vv'
 post_test = 'coverage html'

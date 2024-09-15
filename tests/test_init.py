@@ -4,7 +4,7 @@ from blindage.cli.app import app
 from tests.conftest import runner
 
 
-def test_init():
+def test_init(drop_db):
     os.environ['DEBUG'] = '1'
     result = runner.invoke(app, ['init'], input='Test12345@#$\nTest12345@#$\n')
 
@@ -12,7 +12,7 @@ def test_init():
     assert 'Database created' in result.stdout
 
 
-def test_init_with_error_when_repeating_password():
+def test_init_with_error_when_repeating_password(drop_db):
     os.environ['DEBUG'] = '1'
     result = runner.invoke(app, ['init'], input='Test12345@#$\nTest1245@#$\n')
 
