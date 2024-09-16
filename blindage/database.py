@@ -19,7 +19,7 @@ Session = sessionmaker(engine)
 
 def find_account_by_name(
     name: str, main_password: str, session: T_Session
-) -> Account:
+) -> Account | None:
     accounts = session.scalars(select(Account)).all()
 
     for account in accounts:

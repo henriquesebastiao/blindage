@@ -9,7 +9,7 @@ from rich.table import Table
 from sqlalchemy import select
 from typing_extensions import Annotated, Optional
 
-from blindage.cli import gen, init, new
+from blindage.cli import gen, init, new, update
 from blindage.database import Session, find_account_by_name
 from blindage.messages import (
     DB_NOT_EXISTS,
@@ -30,6 +30,7 @@ console = Console()
 app.add_typer(init.command, name='init')
 app.add_typer(new.command, name='new')
 app.add_typer(gen.command, name='gen')
+app.add_typer(update.command, name='update')
 
 
 def get_version(value: bool):

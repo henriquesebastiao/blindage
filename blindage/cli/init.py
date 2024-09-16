@@ -21,7 +21,7 @@ def main():
     """Generates a new database, this command should only be used once."""
     if Path(DATABASE_NAME).exists():
         print(DB_ALREADY_EXISTS)
-        raise typer.Exit(2)
+        raise typer.Exit(3)
 
     main_pwd = typer.prompt('Main password', hide_input=True)
     confirm_main_pwd = typer.prompt(

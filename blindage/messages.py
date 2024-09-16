@@ -6,3 +6,4 @@ INCENTIVE_TO_CREATE_DB = (
     'Initialize a database with the command: [bold cyan]init[/bold cyan]'
 )
 WRONG_MAIN_PASSWORD = '[bold red]Wrong main password![/bold red]'
+ACCOUNT_NOT_FOUND = '[bold red]The account was not found.[/bold red]'
