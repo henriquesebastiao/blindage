@@ -179,3 +179,5 @@ pyrightconfig.json
 
 **/*.db
 notes.md
+alembic.ini
+.python-version
