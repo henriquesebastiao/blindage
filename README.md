@@ -2,6 +2,9 @@
 
 [![Test](https://github.com/henriquesebastiao/blindage/actions/workflows/test.yml/badge.svg)](https://github.com/henriquesebastiao/blindage/actions/workflows/test.yml)
 [![coverage](https://coverage-badge.samuelcolvin.workers.dev/henriquesebastiao/blindage.svg)](https://coverage-badge.samuelcolvin.workers.dev/redirect/henriquesebastiao/blindage)
+[![Static Badge](https://img.shields.io/badge/status-dev-blue)](https://github.com/henriquesebastiao/blindage)
+[![GitHub License](https://img.shields.io/github/license/henriquesebastiao/statbov?color=blue)](https://github.com/henriquesebastiao/blindage/blob/main/LICENSE)
+[![Visitors](https://api.visitorbadge.io/api/visitors?path=henriquesebastiao%2Fblindage&label=repository%20visits&countColor=%231182c3&style=flat)](https://github.com/henriquesebastiao/blindage)
 
 *You are in control of your data.*
 
