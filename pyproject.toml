@@ -20,7 +20,7 @@ pyperclip = "^1.9.0"
 ruff = "^0.14.14"
 taskipy = "^1.14.1"
 pytest = "^9.0.2"
-pytest-cov = "^6.0.0"
+pytest-cov = "^7.0.0"
 radon = "^6.0.1"
 bandit = "^1.8.0"
 
