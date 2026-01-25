@@ -11,5 +11,5 @@ def test_get_version():
 
 def test_main():
     result = runner.invoke(app)
-    assert result.exit_code == 0
+    assert result.exit_code == 2
     assert 'Pythonic Password Manager' in result.stdout

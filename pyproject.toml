@@ -7,15 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-typer = "^0.13.1"
+typer = "^0.21.1"
 sqlalchemy = "^2.0.36"
-pydantic = "^2.10.2"
+pydantic = "^2.12.5"
 cryptography = "^44.0.0"
 alembic = "^1.14.0"
 argon2-cffi = "^23.1.0"
 pyotp = "^2.9.0"
 pyperclip = "^1.9.0"
-
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.8.1"
@@ -47,7 +46,7 @@ quote-style = 'single'
 
 [tool.ruff.lint.per-file-ignores]
 "database.py" = ["F811"]
-"tests/*" = ["PLR6301"]
+"tests/*" = ["PLR6301", "PLR2004"]
 
 [tool.pytest.ini_options]
 pythonpath = "."
