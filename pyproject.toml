@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-typer = "^0.23.1"
+typer = "^0.24.0"
 sqlalchemy = "^2.0.36"
 pydantic = "^2.12.5"
 cryptography = "^46.0.5"
