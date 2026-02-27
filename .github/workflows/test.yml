@@ -78,7 +78,7 @@ jobs:
       - name: Run Tests
         run: poetry run task test
       - name: Store coverage files
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-html
           path: htmlcov
